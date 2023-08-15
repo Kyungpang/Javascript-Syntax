@@ -24,8 +24,8 @@
       };
 
       const onClickButton = () => {
-        if (!word) {
-          // 제시어가 비어있는가?
+        if (!word || word[word.length - 1] === newWord[0]) {
+          // 제시어가 비어있는가? 혹은 입력한 단어가 올바른가?
           word = newWord;
           $word.textContent = word;
           const order = Number($order.textContent);
@@ -36,31 +36,11 @@
             // 현재 순서가 참가자 순서랑 다르면?
             $order.textContent = order + 1;
           }
-          $input.value = "";
-          $input.focus();
         } else {
-          // 제시어가 비어있지 않은가?
-          if (word[word.length - 1] === newWord[0]) {
-            // 새로 입력한 단어가 올바른가?
-            word = newWord;
-            $word.textContent = word;
-            const order = Number($order.textContent);
-            if (order === number) {
-              // 현재 순서가 참가자 수랑 같으면?
-              $order.textContent = 1;
-            } else {
-              // 현재 순서가 참가자 순서랑 다르면?
-              $order.textContent = order + 1;
-            }
-            $input.value = "";
-            $input.focus();
-          } else {
-            // 새로 입력한 단어가 올바르지 않은가?
-            alert("올바르지 않은 단어입니다!");
-            $input.value = "";
-            $input.focus();
-          }
+          alert("올바르지 않은 단어입니다!");
         }
+        $input.value = "";
+        $input.focus();
       };
 
       $input.addEventListener("input", onInput);
